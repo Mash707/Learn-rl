@@ -1,11 +1,14 @@
 "use client"
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Bell, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 const NonDashboardNavbar = () => {
-  return (
+    const {user} = useUser()
+    const userRole = user?.publicMetadata?.userType as "student" | "teacher"; //should not be undefined;
+
+    return (
     <nav className='nondashboard-navbar'>
         {/* the __subject way of writing components is called block element modifiers */}
         <div  className='nondashboard-navbar__container'>
@@ -33,13 +36,29 @@ const NonDashboardNavbar = () => {
 
             {/* SIGN IN & SIGN UP buttons*/}
             <SignedIn>
-                <UserButton />
+                {/* ISSUE THE USER NAME NEEDS TO BE VISIBLE BUT CURRENTLY IS NOT! */}
+                <UserButton 
+                    // showName={true}
+                    userProfileMode="navigation"
+                    userProfileUrl={
+                        userRole === "teacher"? "/teacher/profile" : "/user/profile"
+                    }
+
+                    // appearance={{
+                    //     elements: {
+                    //       userButtonBox: "flex gap-2 items-center", // Ensure proper alignment
+                    //       userButtonText: "text-white font-medium", // Light gray text
+                    //       userButtonUsername: "text-white hover:text-white", // Directly target username
+                    //       avatarBox: "h-8 w-8", // Ensure avatar doesn't squeeze text
+                    //     }
+                    //   }}
+                />
             </SignedIn>
             <SignedOut>
                 <Link href='/signin'  className='nondashboard-navbar__auth-button--login'>
                     Log in
                 </Link>
-                <Link href='/signup'  className='nondashboard-navbar__auth-button--login'>
+                <Link href='/signup'  className='nondashboard-navbar__auth-button--signup'>
                     Sign up
                 </Link>
             </SignedOut>
