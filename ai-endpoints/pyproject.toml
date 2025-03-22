@@ -1,0 +1,16 @@
+[project]
+name = "ai-endpoints"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.11",
+    "huggingface-hub>=0.29.3",
+    "pathlib>=1.0.1",
+    "python-dotenv>=1.0.1",
+    "sympy>=1.13.3",
+    "tree-sitter>=0.24.0",
+    "tree-sitter-cpp>=0.23.4",
+    "uvicorn>=0.34.0",
+]
