@@ -2,7 +2,7 @@ import Header from '@/components/Header'
 import { UserProfile } from '@clerk/nextjs'
 import React from 'react'
 
-const UserProfilePage = () => {
+const TeacherProfilePage = () => {
   return (
     <>
         <Header title="profile" subtitle='View your profile'/>
@@ -23,4 +23,4 @@ const UserProfilePage = () => {
   )
 }
 
-export default UserProfilePage
+export default TeacherProfilePage
