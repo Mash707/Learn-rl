@@ -41,7 +41,7 @@ function Chatbot() {
       }
 
       const data = await response.json();
-      return data;
+      return data.answer;
     } catch (error) {
       console.error("Error fetching from API:", error);
       return {
