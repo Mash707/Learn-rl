@@ -2,37 +2,37 @@
   "node": {
     "4c9c6c7047a0ae53e3da552870f93cf53454a154": {
       "workers": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%22syncKeylessConfigAction%22%2C%22createOrReadKeylessAction%22%2C%22deleteKeylessAction%22%5D%5D%5D&__client_imported__=!"
+        "app/(dashboard)/user/settings/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%22syncKeylessConfigAction%22%2C%22createOrReadKeylessAction%22%2C%22deleteKeylessAction%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "rsc"
+        "app/(dashboard)/user/settings/page": "rsc"
       }
     },
     "d75244311e50375c21ec8ed0375568a3793d6b8a": {
       "workers": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%22syncKeylessConfigAction%22%2C%22createOrReadKeylessAction%22%2C%22deleteKeylessAction%22%5D%5D%5D&__client_imported__=!"
+        "app/(dashboard)/user/settings/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%22syncKeylessConfigAction%22%2C%22createOrReadKeylessAction%22%2C%22deleteKeylessAction%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "rsc"
+        "app/(dashboard)/user/settings/page": "rsc"
       }
     },
     "e34c97ac38b74faedb12a4c5f59d92abfbf315d7": {
       "workers": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%22syncKeylessConfigAction%22%2C%22createOrReadKeylessAction%22%2C%22deleteKeylessAction%22%5D%5D%5D&__client_imported__=!"
+        "app/(dashboard)/user/settings/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%22syncKeylessConfigAction%22%2C%22createOrReadKeylessAction%22%2C%22deleteKeylessAction%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "rsc"
+        "app/(dashboard)/user/settings/page": "rsc"
       }
     },
     "ed1d1307739dd43e3619ecc76c5a221dbc02603d": {
       "workers": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/user/settings/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CDev%5C%5CLearn-rl%5C%5Cclient%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/(dashboard)/user/profile/[[...profile]]/page": "action-browser"
+        "app/(dashboard)/user/settings/page": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "3bYg7ZLNHaLeePt58BDmQPxzFFdNR9THWcYwzZg7JlU="
+  "encryptionKey": "PmV5D2r0x+H8WLrvqnPe5JF9MOAgun0gMPSlUXht9gk="
 }
