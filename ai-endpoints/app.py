@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware  # Add this import
 from code_parser import CodeParser
-from typing import Dict, Any
 from agent import generate_prediction
 import sympy as sp
 
@@ -10,10 +10,17 @@ class CodeInput(BaseModel):
 
 class Question(BaseModel):
     question:str
-    context: Dict[str, Any]
 
 code_parser = CodeParser()
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.post("/parse")
 async def parse_code(input: CodeInput):
@@ -63,6 +70,6 @@ async def print_info(input: CodeInput):
 
 @app.post("/technical-qna")
 async def generate_answer(question: Question):
-    answer = generate_prediction(question.question, question.context)
+    answer = generate_prediction(question.question)
     print(answer)
     return {"answer": answer}
