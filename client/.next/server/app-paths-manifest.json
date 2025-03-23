@@ -1,3 +1,5 @@
 {
-  "/(dashboard)/user/settings/page": "app/(dashboard)/user/settings/page.js"
+  "/(dashboard)/user/settings/page": "app/(dashboard)/user/settings/page.js",
+  "/(dashboard)/user/profile/[[...profile]]/page": "app/(dashboard)/user/profile/[[...profile]]/page.js",
+  "/(dashboard)/billing/page": "app/(dashboard)/billing/page.js"
 }
