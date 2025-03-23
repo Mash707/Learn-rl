@@ -1,9 +1,10 @@
 {
   "pages": {
-    "/(dashboard)/user/profile/[[...profile]]/page": [
+    "/(dashboard)/user/settings/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/user/profile/[[...profile]]/page.js"
+      "static/css/app/(dashboard)/user/settings/page.css",
+      "static/chunks/app/(dashboard)/user/settings/page.js"
     ],
     "/(dashboard)/layout": [
       "static/chunks/webpack.js",
@@ -15,6 +16,16 @@
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
+    ],
+    "/(dashboard)/user/profile/[[...profile]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/user/profile/[[...profile]]/page.js"
+    ],
+    "/(dashboard)/billing/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/billing/page.js"
     ]
   }
 }
