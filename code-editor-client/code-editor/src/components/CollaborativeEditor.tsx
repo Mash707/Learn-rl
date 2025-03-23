@@ -12,7 +12,7 @@ import styles from "./CollaborativeEditor.module.css";
 import { Avatars } from "@/components/Avatars";
 import { Toolbar } from "@/components/Toolbar";
 
-// Chatbot component
+// Chatbot component with API integration
 function Chatbot() {
   const [messages, setMessages] = useState([
     {
@@ -21,25 +21,69 @@ function Chatbot() {
     },
   ]);
   const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
 
-  const handleSendMessage = (e) => {
+  const fetchAnswerFromAPI = async (question) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:8000/technical-qna", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.answer;
+    } catch (error) {
+      console.error("Error fetching from API:", error);
+      return {
+        error: true,
+        message:
+          "Sorry, I couldn't connect to the API. Please try again later.",
+      };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isLoading) return;
 
     // Add user message
     const userMessage = { sender: "user", text: inputValue };
     setMessages((prev) => [...prev, userMessage]);
 
-    // Simulate bot response (replace with actual API calls later)
-    setTimeout(() => {
-      const botMessage = {
-        sender: "bot",
-        text: "I received your message. This is a placeholder response. In a real implementation, you would integrate with an actual chatbot API here.",
-      };
-      setMessages((prev) => [...prev, botMessage]);
-    }, 1000);
+    // Add loading message
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: "Thinking...", isLoading: true },
+    ]);
+
+    // Fetch response from API
+    const apiResponse = await fetchAnswerFromAPI(inputValue);
+
+    // Remove loading message and add actual response
+    setMessages((prev) => {
+      const filteredMessages = prev.filter((msg) => !msg.isLoading);
+      return [
+        ...filteredMessages,
+        {
+          sender: "bot",
+          text: apiResponse.error
+            ? apiResponse.message
+            : JSON.stringify(apiResponse, null, 2),
+        },
+      ];
+    });
 
     setInputValue("");
   };
@@ -65,7 +109,17 @@ function Chatbot() {
                   : styles.botMessage
               }
             >
-              {message.text}
+              {message.isLoading ? (
+                <div className={styles.loadingIndicator}>
+                  <span>•</span>
+                  <span>•</span>
+                  <span>•</span>
+                </div>
+              ) : message.text.startsWith("{") ? (
+                <pre className={styles.jsonResponse}>{message.text}</pre>
+              ) : (
+                message.text
+              )}
             </div>
           </div>
         ))}
@@ -77,9 +131,10 @@ function Chatbot() {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Ask a question..."
+            disabled={isLoading}
           />
-          <button type="submit">
+          <button type="submit" disabled={isLoading || !inputValue.trim()}>
             <svg
               width="24"
               height="24"
@@ -87,7 +142,10 @@ function Chatbot() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#4a4a4a" />
+              <path
+                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+                fill={isLoading || !inputValue.trim() ? "#ccc" : "#4a4a4a"}
+              />
             </svg>
           </button>
         </form>
