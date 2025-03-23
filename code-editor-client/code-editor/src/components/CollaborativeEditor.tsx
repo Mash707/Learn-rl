@@ -23,10 +23,10 @@ function Chatbot() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const messagesContainerRef = useRef(null);
 
-  const fetchAnswerFromAPI = async (question) => {
+  const fetchAnswerFromAPI = async (question: string) => {
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -58,7 +58,7 @@ function Chatbot() {
     }
   };
 
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = async (e: any) => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
 
@@ -77,7 +77,7 @@ function Chatbot() {
 
     // Remove loading message and add actual response
     setMessages((prev) => {
-      const filteredMessages = prev.filter((msg) => !msg.isLoading);
+      const filteredMessages = prev.filter((msg: any) => !msg.isLoading);
       return [
         ...filteredMessages,
         {
@@ -101,7 +101,7 @@ function Chatbot() {
     <div className={styles.chatbot}>
       <div className={styles.header}>Code Assistant</div>
       <div className={styles.messages} ref={messagesContainerRef}>
-        {messages.map((message, index) => (
+        {messages.map((message: any, index) => (
           <div key={index} className={styles.messageContainer}>
             <div
               className={
