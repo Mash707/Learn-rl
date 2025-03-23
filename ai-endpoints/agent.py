@@ -1,6 +1,5 @@
 import os
 import re
-from typing import Dict, Any
 
 from huggingface_hub import InferenceClient
 from dotenv import load_dotenv  
@@ -17,7 +16,7 @@ text_generation_client = InferenceClient(
     model="mistralai/Mixtral-8x7B-Instruct-v0.1"
 )
 
-def format_prompt_for_model(user_prompt: str, context_data: Dict[str, Any]) -> str:
+def format_prompt_for_model(user_prompt: str) -> str:
     """
     Format the user prompt and context data for the model.
     
@@ -34,28 +33,27 @@ def format_prompt_for_model(user_prompt: str, context_data: Dict[str, Any]) -> s
         "libraries, best practices, and standards. Include code examples where applicable."
     )
 
-    context_str = "\n".join([f" - {key}: {value}" for key, value in context_data.items()])
+    # context_str = "\n".join([f" - {key}: {value}" for key, value in context_data.items()])
     
     user_context_prompt = (
         f"User Question: {user_prompt}\n"
-        f"Context Information:\n{context_str}\n\n"
         "Please provide a comprehensive but concise technical answer."
     )
 
     combined_prompt = f"<s>[SYS] {system_context_prompt} [/SYS]\n[INST] {user_context_prompt} [/INST]"
     return combined_prompt
 
-def generate_prediction(user_question: str, context_data: Dict[str, Any]) -> str:
+def generate_prediction(user_question: str) -> str:
     generation_parameters = dict(
         temperature=0.5,       # Controls randomness of generated text
         max_new_tokens=1024,   # Maximum number of tokens to generate
-        top_p=0.96,            # Likelihood of selecting common words
-        repetition_penalty=1.0,# Discourages repetition
+        top_p=0.96,           
+        repetition_penalty=1.0,
         do_sample=True,
         seed=42,
     )
 
-    model_ready_prompt = format_prompt_for_model(user_question, context_data)
+    model_ready_prompt = format_prompt_for_model(user_question)
 
     generated_text_stream = text_generation_client.text_generation(
         model_ready_prompt,
@@ -69,16 +67,25 @@ def generate_prediction(user_question: str, context_data: Dict[str, Any]) -> str
     for text_segment in generated_text_stream:
         final_output_text += text_segment.token.text
 
-    return final_output_text
+    # Use regex to filter out </s> tokens
+    cleaned_output = re.sub(r'</s>', '', final_output_text)
+    
+    # Also remove the original prompt from the response if present
+    # This looks for the [/INST] tag and takes everything after it
+    match = re.search(r'\[/INST\](.*)', cleaned_output, re.DOTALL)
+    if match:
+        cleaned_output = match.group(1).strip()
+
+    return cleaned_output
 
 if __name__ == "__main__":
-    sample_user_question = "How do I optimize memory usage in C++ when dealing with large data structures?"
+    sample_user_question = "How do I use hashmaps in cpp?"
     
-    context_data = {
-        "Category": "Technical Documentation",
-        "Reference": "Latest C++ standards and memory management techniques", 
-        "Code_Analysis": "Memory usage concerns detected in large data structures"
-    }
+    # context_data = {
+    #     "Category": "Technical Documentation",
+    #     "Reference": "Latest C++ standards and memory management techniques", 
+    #     "Code_Analysis": "Memory usage concerns detected in large data structures"
+    # }
 
-    result = generate_prediction(sample_user_question, context_data)
+    result = generate_prediction(sample_user_question)
     print("Generated Response:\n", result)
