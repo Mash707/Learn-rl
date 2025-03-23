@@ -11,6 +11,7 @@ import { useRoom, useSelf } from "@liveblocks/react/suspense";
 import styles from "./CollaborativeEditor.module.css";
 import { Avatars } from "@/components/Avatars";
 import { Toolbar } from "@/components/Toolbar";
+import ReactMarkdown from "react-markdown";
 
 // Chatbot component with API integration
 function Chatbot() {
@@ -90,10 +91,9 @@ function Chatbot() {
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    // Using setTimeout to ensure DOM has updated before scrolling
-    setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   return (
@@ -115,10 +115,14 @@ function Chatbot() {
                   <span>•</span>
                   <span>•</span>
                 </div>
-              ) : message.text.startsWith("{") ? (
-                <pre className={styles.jsonResponse}>{message.text}</pre>
+              ) : typeof message.text === "object" ? (
+                <pre className={styles.jsonResponse}>
+                  {JSON.stringify(message.text, null, 2)}
+                </pre>
               ) : (
-                message.text
+                <div className={styles.markdown}>
+                  <ReactMarkdown>{message.text}</ReactMarkdown>
+                </div>
               )}
             </div>
           </div>
