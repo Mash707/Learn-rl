@@ -79,9 +79,7 @@ function Chatbot() {
         ...filteredMessages,
         {
           sender: "bot",
-          text: apiResponse.error
-            ? apiResponse.message
-            : JSON.stringify(apiResponse, null, 2),
+          text: apiResponse.error ? apiResponse.message : apiResponse,
         },
       ];
     });
