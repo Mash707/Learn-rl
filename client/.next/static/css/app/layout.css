@@ -898,6 +898,9 @@ body{
 .w-3\/4{
   width: 75%;
 }
+.w-3\/5{
+  width: 60%;
+}
 .w-4{
   width: 1rem;
 }
@@ -1286,6 +1289,10 @@ body{
 }
 .bg-transparent{
   background-color: transparent;
+}
+.bg-gray-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 .bg-gradient-to-b{
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
@@ -5494,6 +5501,13 @@ input[type="color"] {
 
 .data-\[state\=unchecked\]\:bg-input[data-state="unchecked"]{
   background-color: hsl(var(--input));
+}
+
+
+
+.data-\[state\=checked\]\:bg-primary-700[data-state="checked"]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(120 120 252 / var(--tw-bg-opacity, 1));
 }
 
 
