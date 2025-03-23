@@ -29,13 +29,16 @@ function Chatbot() {
   const fetchAnswerFromAPI = async (question) => {
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:8000/technical-qna", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question }),
-      });
+      const response = await fetch(
+        "https://learn-rl.onrender.com/technical-qna",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ question }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`API request failed with status: ${response.status}`);
